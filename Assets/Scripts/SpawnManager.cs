@@ -11,23 +11,39 @@ public class SpawnManager : MonoBehaviour
 
     private float startDelay = 1f;
     private float spawnInterval = 2f;
+    public int enemyCount;
+    Enemy[] enemies;
 
     // Start is called before the first frame update
     void Start()
     {
-        InvokeRepeating("EnemySpawn", startDelay, spawnInterval);
+        SpawnEnemyWave(3);
+        //InvokeRepeating("EnemySpawn", startDelay, spawnInterval);
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        enemies = FindObjectsOfType<Enemy>();
+        enemyCount = enemies.Length;
+        if(enemyCount == 0)
+        {
+            SpawnEnemyWave(1);
+        }
     }
 
-    private void EnemySpawn()
+    private void SpawnEnemyWave(int enemiesToSpawn)
     {
-        Instantiate(enemyPrefab, GenerateSpawnPosition(), enemyPrefab.transform.rotation);
+        for (int i = 0; i < enemiesToSpawn; i++)
+        {
+            Instantiate(enemyPrefab, GenerateSpawnPosition(), enemyPrefab.transform.rotation);  
+        }
     }
+
+    //private void EnemySpawn()
+    //{
+    //    Instantiate(enemyPrefab, GenerateSpawnPosition(), enemyPrefab.transform.rotation);
+    //}
 
     private Vector3 GenerateSpawnPosition()
     {
