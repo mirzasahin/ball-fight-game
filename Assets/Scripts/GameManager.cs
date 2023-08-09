@@ -20,7 +20,5 @@ public class GameOver : MonoBehaviour
     public void PlayAgain()
     {
         SceneManager.LoadScene("Game");
-        Time.timeScale = 1.0f;
-        Debug.Log(Time.timeScale);
     }
 }

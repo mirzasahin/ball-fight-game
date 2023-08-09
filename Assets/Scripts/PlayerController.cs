@@ -23,6 +23,7 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Time.timeScale = 1;
         rigidBd = GetComponent<Rigidbody>();
         focalPoint = GameObject.Find("Focal Point");
     }
