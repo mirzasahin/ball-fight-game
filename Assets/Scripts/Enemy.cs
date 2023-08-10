@@ -8,6 +8,7 @@ public class Enemy : MonoBehaviour
     private Rigidbody enemyRb;
     private GameObject player;
     private Vector3 lookDirection;
+    private bool isGround = true;
 
 
     // Start is called before the first frame update
@@ -21,11 +22,26 @@ public class Enemy : MonoBehaviour
     void Update()
     {
         lookDirection = (player.transform.position - transform.position).normalized;
-        enemyRb.AddForce(lookDirection * speed);
+        if (isGround)
+        {
+            enemyRb.AddForce(lookDirection * speed);
+        }
 
-        if(transform.position.y < -10)
+        if (transform.position.y < -10)
         {
             Destroy(gameObject);
+        }
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Ground"))
+        {
+            isGround = true;
+        }
+        else
+        {
+            isGround = false;
         }
     }
 }
